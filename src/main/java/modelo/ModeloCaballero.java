@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +25,8 @@ public class ModeloCaballero {
 				caballero.setFuerza(rs.getInt("fuerza"));
 				caballero.setExperiencia(rs.getInt("experiencia"));
 				caballero.setFoto(rs.getString("foto"));
-				caballero.setArma(null);
+				caballero.setArma(new ModeloArma().getArma(rs.getInt("id")));
+				caballero.setEscudo(new ModeloEscudo().getEscudo(rs.getInt("id")));
 				
 				caballeros.add(caballero);
 
@@ -37,5 +39,7 @@ public class ModeloCaballero {
 		return caballeros;
 
 	}
+	
+	
 
 }

@@ -18,6 +18,7 @@
 				<th>Experiencia</th>
 				<th>Foto</th>
 				<th>arma</th>
+				<th>escudo</th>
 			</tr>
 			<tr>
 				<td>${caballero.id}</td>
@@ -26,6 +27,7 @@
 				<td>${caballero.experiencia}</td>
 				<td>${caballero.foto}</td>
 				<td>${caballero.arma}</td>
+				<td>${caballero.escudo}</td>
 			</tr>
 		</c:forEach>
 		</table>

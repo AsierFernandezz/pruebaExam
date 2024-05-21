@@ -8,7 +8,14 @@ public class Caballero {
 	int experiencia;
 	String foto;
 	Arma arma;
+	Escudo escudo;
 	
+	public Escudo getEscudo() {
+		return escudo;
+	}
+	public void setEscudo(Escudo escudo) {
+		this.escudo = escudo;
+	}
 	public int getId() {
 		return id;
 	}
@@ -46,13 +53,14 @@ public class Caballero {
 		this.arma = arma;
 	}
 	
-
-
 	@Override
 	public String toString() {
 		return "Caballero [id=" + id + ", nombre=" + nombre + ", fuerza=" + fuerza + ", experiencia=" + experiencia
-				+ ", foto=" + foto + ", arma=" + arma + "]";
+				+ ", foto=" + foto + ", arma=" + arma + ", escudo=" + escudo + "]";
 	}
+	
+
+
 	
 	
 }
