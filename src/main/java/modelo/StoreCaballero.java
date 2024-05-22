@@ -45,13 +45,15 @@ public class StoreCaballero extends HttpServlet {
 		Arma arma = ma.getArma(Integer.parseInt(request.getParameter("arma")));
 		Escudo escudo = me.getEscudo(Integer.parseInt(request.getParameter("escudo")));
 		
+		
+		if(Validador.nombreCompleto(nombre)== true && Validador.expYFuerza(experiencia, fuerza)==true && Validador.nombreExiste(nombre)==false && Validador.armaEscudoRellenado(arma, escudo)==true) {
 		ModeloCaballero mc = new ModeloCaballero();
 		Caballero caballero = new Caballero();
 		caballero.setNombre(nombre);
 		caballero.setFuerza(fuerza);
 		caballero.setExperiencia(experiencia);
 		caballero.setFoto(foto);
-
+		
 		caballero.setArma(arma);
 
 		caballero.setEscudo(escudo);
@@ -59,6 +61,7 @@ public class StoreCaballero extends HttpServlet {
 		mc.insertarCaballero(caballero);
 		
 		response.sendRedirect("IndexCaballeros");
+		}
 	}
 
 }

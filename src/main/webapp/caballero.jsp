@@ -31,8 +31,8 @@
                         <td>${caballero.fuerza}</td>
                         <td>${caballero.experiencia}</td>
                         <td>${caballero.foto}</td>
-                        <td>${caballero.arma}</td>
-                        <td>${caballero.escudo}</td>
+                        <td>${caballero.arma.nombre}</td>
+                        <td>${caballero.escudo.nombre}</td>
                     </tr>
                 </c:forEach>
             </tbody>

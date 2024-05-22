@@ -25,6 +25,7 @@ public class ModeloCaballero {
 				caballero.setFuerza(rs.getInt("fuerza"));
 				caballero.setExperiencia(rs.getInt("experiencia"));
 				caballero.setFoto(rs.getString("foto"));
+
 				caballero.setArma(new ModeloArma().getArma(rs.getInt("id")));
 				caballero.setEscudo(new ModeloEscudo().getEscudo(rs.getInt("id")));
 				
@@ -45,13 +46,14 @@ public class ModeloCaballero {
 		Conector conector = new Conector();
 		
 		try {
-			PreparedStatement pst = conector.getCn().prepareStatement("INSERT INTO caballeros (nombre, fuerza, experiencia, foto, arma_id, escudo_id) VALUES (?,?,?,?,?,?)");
-			pst.setString(1, caballero.getNombre());
-			pst.setInt(2, caballero.getFuerza());
-			pst.setInt(3, caballero.getExperiencia());
-			pst.setString(4, caballero.getFoto());
-			pst.setInt(5, caballero.getArma().getId());
-			pst.setInt(6, caballero.getEscudo().getId());
+			PreparedStatement pst = conector.getCn().prepareStatement("INSERT INTO caballeros (id,nombre, fuerza, experiencia, foto, arma_id, escudo_id) VALUES (?,?,?,?,?,?,?)");
+			pst.setInt(1, caballero.getId());
+			pst.setString(2, caballero.getNombre());
+			pst.setInt(3, caballero.getFuerza());
+			pst.setInt(4, caballero.getExperiencia());
+			pst.setString(5, caballero.getFoto());
+			pst.setInt(6, caballero.getArma().getId());
+			pst.setInt(7, caballero.getEscudo().getId());
 			
 			pst.execute();
 			
@@ -59,6 +61,24 @@ public class ModeloCaballero {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public boolean testNombre(String nombre) {
+
+		Conector conector = new Conector();
+		
+		try {
+			PreparedStatement pst = conector.getCn().prepareStatement("SELECT * FROM caballeros WHERE nombre=?");
+			pst.setString(1, nombre);
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
