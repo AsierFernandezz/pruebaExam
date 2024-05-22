@@ -31,11 +31,10 @@ public class Validador {
 	}
 	
 	public static boolean nombreExiste(String nombre) {
-		
+				
 		ModeloCaballero mc = new ModeloCaballero();
-		mc.testNombre(nombre);
-		return true;
-		
+		return mc.testNombre(nombre);
+
 		
 	}
 	

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class StoreCaballero
  */
@@ -34,7 +35,8 @@ public class StoreCaballero extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		request.setAttribute("msg", request.getParameter("msg"));	
+		
 		String nombre = request.getParameter("nombre");
 		int fuerza = Integer.parseInt(request.getParameter("fuerza"));
 		int experiencia = Integer.parseInt(request.getParameter("experiencia"));
@@ -46,21 +48,24 @@ public class StoreCaballero extends HttpServlet {
 		Escudo escudo = me.getEscudo(Integer.parseInt(request.getParameter("escudo")));
 		
 		
-		if(Validador.nombreCompleto(nombre)== true && Validador.expYFuerza(experiencia, fuerza)==true && Validador.nombreExiste(nombre)==false && Validador.armaEscudoRellenado(arma, escudo)==true) {
-		ModeloCaballero mc = new ModeloCaballero();
-		Caballero caballero = new Caballero();
-		caballero.setNombre(nombre);
-		caballero.setFuerza(fuerza);
-		caballero.setExperiencia(experiencia);
-		caballero.setFoto(foto);
+		if(Validador.nombreCompleto(nombre)== true && Validador.expYFuerza(experiencia, fuerza)==true && Validador.nombreExiste(nombre)==true && Validador.armaEscudoRellenado(arma, escudo)==true) {
+			ModeloCaballero mc = new ModeloCaballero();
+			Caballero caballero = new Caballero();
+			caballero.setNombre(nombre);
+			caballero.setFuerza(fuerza);
+			caballero.setExperiencia(experiencia);
+			caballero.setFoto(foto);
+			
+			caballero.setArma(arma);
+	
+			caballero.setEscudo(escudo);
+	
+			mc.insertarCaballero(caballero);
+			
+			response.sendRedirect("IndexCaballeros");
 		
-		caballero.setArma(arma);
-
-		caballero.setEscudo(escudo);
-
-		mc.insertarCaballero(caballero);
-		
-		response.sendRedirect("IndexCaballeros");
+		}else if (Validador.nombreCompleto(nombre)==false) {
+			//response.sendRedirect("IndexCaballeros?msg=failRegistroNombre");
 		}
 	}
 

@@ -26,8 +26,8 @@ public class ModeloCaballero {
 				caballero.setExperiencia(rs.getInt("experiencia"));
 				caballero.setFoto(rs.getString("foto"));
 
-				caballero.setArma(new ModeloArma().getArma(rs.getInt("id")));
-				caballero.setEscudo(new ModeloEscudo().getEscudo(rs.getInt("id")));
+				caballero.setArma(new ModeloArma().getArma(rs.getInt("arma_id")));
+				caballero.setEscudo(new ModeloEscudo().getEscudo(rs.getInt("escudo_id")));
 				
 				caballeros.add(caballero);
 
@@ -72,13 +72,12 @@ public class ModeloCaballero {
 			pst.setString(1, nombre);
 			ResultSet rs = pst.executeQuery();
 			
-			while (rs.next()) {
-				return true;
-			}
+			return true;
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
+		
 	}
 
 }
