@@ -40,8 +40,6 @@ public class ModeloArma {
 	}
 	
 	public Arma getArma(int id_arma) {
-		
-		Arma arma = new Arma();
 		Conector conector = new Conector();
 		
 		try {
@@ -50,20 +48,20 @@ public class ModeloArma {
 			ResultSet rs = pst.executeQuery();
 			
 			while(rs.next()) {
-
+				Arma arma = new Arma();
 				arma.setId(rs.getInt("id"));
 				arma.setNombre(rs.getString("nombre"));
 				arma.setCapacidad_danio(rs.getInt("capacidad_danio"));
 				arma.setFoto(rs.getString("foto"));
-				
 				return arma;
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
-		return arma;
+		return null;
 		
 	}
 
